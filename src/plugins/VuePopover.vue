@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'Popover',
+  name: 'VuePopover',
   props: {
     placement: {
       type: String,
@@ -34,7 +34,7 @@ export default {
       style: {
         top: 0,
         left: 0,
-        width: this.innerWidth,
+        width: this.innerWidth + "px",
       },
       heightContent: 0,
       widthContent: 0,
@@ -50,20 +50,21 @@ export default {
             widthButton = this.$refs.popoverButton.clientWidth;
       switch(this.placement) {
         case 'top':
-          this.$set(this.style, 'top', -(this.offset + this.heightContent) + "px");
+          this.$set(this.style, 'top', -(this.heightContent + this.offset) + "px");
           this.$set(this.style, 'left', (widthButton / 2 - this.widthContent / 2) + "px");   
           break;
         case 'right':
-          this.$set(this.style, 'left', (+widthButton + this.offset) + "px");
+          this.$set(this.style, 'left', (widthButton + this.offset) + "px");
           this.$set(this.style, 'top', (heightButton / 2 - this.heightContent / 2) + "px");
           break;
         case 'bottom':
-          this.$set(this.style, 'top', this.offset + heightButton + "px");
+
+          this.$set(this.style, 'top', heightButton + this.offset + "px");
           this.$set(this.style, 'left', (widthButton / 2 - this.widthContent / 2) + "px");
           break;
         case 'left':
-          this.$set(this.style, 'left', -(this.offset + this.widthContent) + "px");
-          this.$set(this.style, 'top', (-this.heightContent / 2 + heightButton / 2) + "px");
+          this.$set(this.style, 'left', -(this.widthContent + this.offset) + "px");
+          this.$set(this.style, 'top', (heightButton / 2 - this.heightContent / 2) + "px");
           break;
       }
     }
@@ -79,10 +80,10 @@ export default {
     document.addEventListener('click', function (e) {
       const isButton = _this.findClassName(e.target, 'popover__button');
       const isContent = _this.findClassName(e.target, 'popover__content');
-      const inPopover =  _this.findClassName(e.target, 'popover') === _this.$el ;
+      const inThisPopover =  _this.findClassName(e.target, 'popover') === _this.$el ;
 
-      _this.showContent = (isContent && inPopover 
-        || !_this.showContent && isButton  && inPopover);
+      _this.showContent = (isContent && inThisPopover 
+        || !_this.showContent && isButton  && inThisPopover);
 
     });
   },
