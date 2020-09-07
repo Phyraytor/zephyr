@@ -17,12 +17,9 @@
 </template>
 
 <script>
-import VuePopover from './plugins/VuePopover.vue';
-
 export default {
   name: 'App',
   components: {
-    VuePopover
   }
 }
 </script>

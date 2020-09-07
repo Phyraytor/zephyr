@@ -17,15 +17,21 @@ export default {
       type: String,
       validator: function (value) {
         return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
-      }
+      },
      },
     offset: {
       type: Number,
       default: 10,
+      validator: function (value) {
+        return value >= 0;
+      },
     },
     innerWidth: {
       type: Number,
       default: 150,
+      validator: function (value) {
+        return value >= 0;
+      },
     },
   },
   data: function() {
